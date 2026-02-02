@@ -1,8 +1,9 @@
 import { createRoot } from "react-dom/client"
 import { Provider } from "react-redux"
-import  App  from "./App"
+import App from "./App"
 import { store } from "./store/store"
 import GlobalStyles from "./styles/GlobalStyles"
+import { UserProvider } from "./content/Users/UsersContext/UserContext"
 
 const container = document.getElementById("root")
 
@@ -10,10 +11,13 @@ if (container) {
   const root = createRoot(container)
 
   root.render(
-    <Provider store={store}>
-      <GlobalStyles />
-      <App />
-    </Provider>,
+    <UserProvider>
+      <Provider store={store}>
+        <GlobalStyles />
+        <App />
+      </Provider>
+      
+    </UserProvider>,
   )
 } else {
   throw new Error(
