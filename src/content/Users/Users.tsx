@@ -11,50 +11,54 @@ import {
   MenuButton,
 } from "./styles";
 import Button from "../../components/Button/Button";
-import { UserContext } from "../../App";
-
-
-
+import { UserContext } from "../../content/Users/UsersContext/UserContext"
+import { LogoImg } from "../Layout/styles";
 
 export default function Users() {
   const { pathname } = useLocation();
   const isUsers = pathname === "/users";
   const navigate = useNavigate();
   const [openMenu, setOpenMenu] = useState(false);
-  const {userData} = useContext(UserContext)  
+
+  const userContext = useContext(UserContext);
+
+  if (!userContext) {
+    throw new Error("UserContext is missing provider");
+  }
+
+  const { userData } = userContext;
 
   return (
-    
-      <UsersWrapper>
-        <Header>
-          <Title
-            onClick={() => {
-              navigate(ROUTES.HOME);
-            }}
-          >
-            Business Management
-          </Title>
-          <Logo>{userData.name}</Logo>
-        </Header>
-        {isUsers && <Main>
-          <MenuButton onClick={() => setOpenMenu((prev) => !prev)}>
+    <UsersWrapper>
+      <Header>
+        <Title onClick={() => navigate(ROUTES.HOME)}>
+          Business Management
+        </Title>
+
+        <Logo>{userData?.name ?? "Guest"}
+          <LogoImg src="/logotip.png" />
+        </Logo>
+      </Header>
+
+      {isUsers && (
+        <Main>
+          <MenuButton onClick={() => setOpenMenu(prev => !prev)}>
             ☰
             <NavigationContainer open={openMenu}>
-              <Button isGradientBlue name={"Time-tracking"} />
-              <Button isGradientBlue name={"Projects"} />
-              <Button isGradientBlue name={"Clients"} />
-              <Button isGradientBlue name={"Invoices"} />
-              <Button isGradientBlue name={"Accounting"} />
-              <Button isGradientBlue name={"Reports"} />
-              <Button isGradientBlue name={"Users"} />
-              <Button isGradientBlue name={"Users"} />
-              <Button isGradientBlue name={"Users"} />
-              <Button isGradientBlue name={"Users"} />
+              <Button isGradientBlue name="Time-tracking" />
+              <Button isGradientBlue name="Projects" />
+              <Button isGradientBlue name="Clients" />
+              <Button isGradientBlue name="Invoices" />
+              <Button isGradientBlue name="Accounting" />
+              <Button isGradientBlue name="Reports" />
+              <Button isGradientBlue name="Users" />
+              <Button isGradientBlue name="Users" />
+              <Button isGradientBlue name="Users" />
+              <Button isGradientBlue name="Users" />
             </NavigationContainer>
           </MenuButton>
-          {/* <Outlet /> */}
-        </Main>}
-      </UsersWrapper>
-   
+        </Main>
+      )}
+    </UsersWrapper>
   );
 }

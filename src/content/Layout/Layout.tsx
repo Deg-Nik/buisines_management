@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../constants/routes";
 import {
   Footer,
@@ -11,9 +11,9 @@ import {
   FooterNavigation,
   Title,
 } from "./styles";
-import { LayoutProps } from "./types";
 
-export default function Layout({ children }: LayoutProps) {
+
+export default function Layout() {
   const navigate = useNavigate();
 
   const goHome = () => navigate(ROUTES.HOME);
@@ -30,7 +30,9 @@ export default function Layout({ children }: LayoutProps) {
         </Logo>
       </Header>
 
-      <Main>{children}</Main>
+      <Main>
+        <Outlet/>
+      </Main>
 
       <Footer>
         <FooterNavigation>
