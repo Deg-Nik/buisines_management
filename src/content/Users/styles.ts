@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { NavLink, type NavLinkRenderProps, Link } from "react-router-dom";
+import { NavLink, type NavLinkRenderProps } from "react-router-dom";
 
 export const UsersWrapper = styled.div`
   display: flex;
